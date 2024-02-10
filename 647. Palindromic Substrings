@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int cnt = 0;
+   
+    bool ispal(const string& str) {
+        string temp = str;
+        transform(temp.begin(), temp.end(), temp.begin(), ::tolower); 
+        temp.erase(remove_if(temp.begin(), temp.end(), [](char c) { return !isalnum(c); }), temp.end());
+
+        int left = 0;
+        int right = temp.size() - 1;
+
+        while (left < right) {
+            if (temp[left] != temp[right])
+                return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    void f(const string& s, int start, int n, string substr) {
+        for (int i = start; i < n; ++i) {
+            substr += s[i];
+            if (ispal(substr))
+                cnt++;
+        }
+    }
+
+    int countSubstrings(string s) {
+        cnt = 0;
+        int n = s.size();
+        for (int i = 0; i < n; ++i) {
+            f(s, i, n, "");
+        }
+        return cnt;
+    }
+};
