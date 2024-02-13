@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool is_palindrome(string& s) {
+   
+    string modified_s;
+    for (char c : s) {
+        if (isalpha(c)) {
+            modified_s += tolower(c);
+        }
+    }
+    
+    
+    return modified_s == string(modified_s.rbegin(), modified_s.rend());
+}
+    string firstPalindrome(vector<string>& words) {
+
+        for(auto it:words){
+            if(is_palindrome(it)){
+                return it;
+            }
+        }
+        return "";
+        
+    }
+};
