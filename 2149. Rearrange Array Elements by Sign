@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        
+        int n=nums.size();
+        queue<int> neg;
+        queue<int> pos;
+
+        for(auto it:nums){
+            if(it>0){
+                pos.push(it);
+            }
+            else{
+                neg.push(it);
+            }
+        }
+        int i=0;
+        while((!neg.empty() || !pos.empty())&& i<n){
+           nums[i]=pos.front();
+           pos.pop();
+           nums[i+1]=neg.front();
+           neg.pop();
+           i+=2;
+        }
+   
+
+   return nums;
+
+        
+    }
+};
