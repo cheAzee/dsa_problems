@@ -1,0 +1,29 @@
+
+class Solution {
+public:
+    int findLeastNumOfUniqueInts(std::vector<int>& arr, int k) {
+        std::map<int, int> mp;
+        for (int num : arr) {
+            mp[num]++;
+        }
+
+        std::vector<int> frequencies;
+        for (auto& pair : mp) {
+            frequencies.push_back(pair.second);
+        }
+
+        std::sort(frequencies.begin(), frequencies.end());
+
+        int removed = 0;
+        for (int freq : frequencies) {
+            if (k >= freq) {
+                k -= freq;
+                removed++;
+            } else {
+                break;
+            }
+        }
+
+        return mp.size() - removed;
+    }
+};
