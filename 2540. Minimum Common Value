@@ -1,0 +1,15 @@
+ 
+class Solution {
+public:
+    int getCommon(vector<int>& nums1, vector<int>& nums2) {
+        unordered_set<int> nums1_set(nums1.begin(), nums1.end());
+        
+        for (int num : nums2) {
+            if (nums1_set.count(num) > 0) {
+                return num;
+            }
+        }
+        
+        return -1;
+    }
+};
