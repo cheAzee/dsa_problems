@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        if (!head || !head->next)
+            return;
+
+        // Step 1: Find the middle of the list
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        // Step 2: Split the list into two halves
+        ListNode* secondHalf = slow->next;
+        slow->next = nullptr;
+
+        // Step 3: Reverse the second half of the list
+        stack<ListNode*> s;
+        while (secondHalf) {
+            s.push(secondHalf);
+            secondHalf = secondHalf->next;
+        }
+
+        // Step 4: Merge the first half and reversed second half
+        ListNode* ptr = head;
+        while (!s.empty()) {
+            ListNode* temp = ptr->next;
+            ptr->next = s.top();
+            s.pop();
+            ptr->next->next = temp;
+            ptr = temp;
+        }
+    }
+};
